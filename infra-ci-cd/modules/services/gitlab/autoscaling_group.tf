@@ -38,3 +38,5 @@ resource "aws_autoscaling_group" "gitlab_asg" {
     propagate_at_launch = true
   }
 }
+
+# A voir pour le update_policy pour permettre de mettre à jour le service avec le autoscaling group qui s'occope de rm et créer une nouvelle instance avec la nouvelle configuration

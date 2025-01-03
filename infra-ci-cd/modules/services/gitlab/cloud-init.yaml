@@ -1,0 +1,7 @@
+#cloud-config
+write_files:
+  - path: /opt/nexus/conf/nexus.properties
+    permissions: '0644'
+    content: $${config_content}
+runcmd:
+  - sudo systemctl restart nexus

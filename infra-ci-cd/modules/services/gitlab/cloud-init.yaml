@@ -1,7 +1,18 @@
 #cloud-config
+
+packages:
+  - curl
+  - openssh-server
+  - ca-certificates
+  - postfix
+  - git
+  - gitlab-ee
+
 write_files:
-  - path: /opt/nexus/conf/nexus.properties
+  - path: /etc/gitlab/gitlab.rb
     permissions: '0644'
     content: $${config_content}
+
+
 runcmd:
-  - sudo systemctl restart nexus
+  - gitlab-ctl reconfigure

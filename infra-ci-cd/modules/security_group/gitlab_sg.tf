@@ -32,6 +32,6 @@ resource "aws_security_group" "gitlab_sg" {
   }
 }
 
-output "ci_cd_sg_id" {
+output "gitlab_sg_id" {
   value = aws_security_group.gitlab_sg.id
 }

@@ -6,6 +6,6 @@ variable "private_subnet_id" {
   description = "The ID of the private subnet"
 }
 
-variable "gitlab_sg_id" {
-  description = "The ID of the GitLab security group"
+variable "nexus_sg_id" {
+  description = "The ID of the security group"
 }

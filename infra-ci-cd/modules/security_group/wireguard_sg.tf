@@ -1,6 +1,6 @@
-resource "aws_security_group" "openvpn_sg" {
-  name        = "openvpn_sg"
-  description = "Security group for OpenVPN"
+resource "aws_security_group" "wireguard_sg" {
+  name        = "wireguard_sg"
+  description = "Security group for wireguard"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -11,8 +11,8 @@ resource "aws_security_group" "openvpn_sg" {
   }
 
   ingress {
-    from_port   = 1194
-    to_port     = 1194
+    from_port   = 51820
+    to_port     = 51820
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -25,6 +25,6 @@ resource "aws_security_group" "openvpn_sg" {
   }
 }
 
-output "openvpn_sg_id" {
-  value = aws_security_group.openvpn_sg.id
+output "wireguard_sg_id" {
+  value = aws_security_group.wireguard_sg.id
 }

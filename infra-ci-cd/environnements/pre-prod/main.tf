@@ -21,14 +21,14 @@ module "nexus" {
   nexus_sg_id = module.security_group.nexus_sg_id
 }
 
-module "openvpn" {
-  source = "../../modules/services/openvpn"
+module "wireguard" {
+  source = "../../modules/services/wireguard"
   vpc_id = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
-  openvpn_sg_id = module.security_group.openvpn_sg_id
+  wireguard_sg_id = module.security_group.wireguard_sg_id
 }
 
 output "vpn_public_ip" {
-  value = module.openvpn.vpn_public_ip
+  value = module.wireguard.vpn_public_ip
   description = "Adresse IP publique du serveur VPN"
 }

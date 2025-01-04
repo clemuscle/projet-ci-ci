@@ -1,4 +1,4 @@
-resource "aws_launch_template" "gitlab_launch_template" {
+resource "aws_launch_template" "nexus_launch_template" {
   name_prefix   = "nexus-launch-template"
   image_id      = "ami-0e6e2ea0ec444b23e" # AMI à utiliser
   instance_type = "t2.micro"
@@ -20,10 +20,10 @@ resource "aws_launch_template" "gitlab_launch_template" {
   }
 }
 
-resource "aws_autoscaling_group" "gitlab_asg" {
-  name = "gitlab_asg"
+resource "aws_autoscaling_group" "nexus_asg" {
+  name = "nexus_asg"
   launch_template {
-    id      = aws_launch_template.gitlab_launch_template.id
+    id      = aws_launch_template.nexus_launch_template.id
     version = "$Latest"
   }
 
@@ -42,10 +42,10 @@ resource "aws_autoscaling_group" "gitlab_asg" {
 # A voir pour le update_policy pour permettre de mettre à jour le service avec le autoscaling group qui s'occope de rm et créer une nouvelle instance avec la nouvelle configuration
 
 
-output "gitlab_asg_id" {
-  value = aws_autoscaling_group.gitlab_asg.id
+output "nexus_asg_id" {
+  value = aws_autoscaling_group.nexus_asg.id
 }
 
-output "gitlab_asg_arn" {
-  value = aws_autoscaling_group.gitlab_asg.arn
+output "nexus_asg_arn" {
+  value = aws_autoscaling_group.nexus_asg.arn
 }

@@ -1,4 +1,4 @@
-variable "openvpn_sg_id" {
+variable "wireguard_sg_id" {
     description = "The ID of the security group"
 }
 

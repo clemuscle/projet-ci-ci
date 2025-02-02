@@ -14,8 +14,8 @@ write_files:
       SaveConfig = true
       ListenPort = 51820
       PrivateKey = REPLACE_WITH_PRIVATE_KEY
-      PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-      PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+      PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o enX0 -j MASQUERADE
+      PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o enX0 -j MASQUERADE
 
 runcmd:
   # 1. Créer le dossier /etc/wireguard

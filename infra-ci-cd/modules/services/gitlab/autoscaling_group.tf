@@ -4,6 +4,8 @@ resource "aws_launch_template" "gitlab_launch_template" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [var.gitlab_sg_id]
 
+  key_name = var.ssh_key
+
   user_data = base64encode(templatefile("${path.module}/cloud-init.yaml", {
     config_content = file("../../configurations/gitlab/gitlab.rb")
   }))
@@ -11,7 +13,7 @@ resource "aws_launch_template" "gitlab_launch_template" {
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = "GitLabInstance"
+      Name = "gitlab-instance"
     }
   }
 

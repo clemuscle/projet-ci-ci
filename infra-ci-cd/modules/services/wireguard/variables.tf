@@ -9,3 +9,7 @@ variable "vpc_id" {
 variable "public_subnet_id" {
     description = "The ID of the public subnet"
 }
+
+variable "ssh_key" {
+    description = "The name of the SSH key pair"
+}

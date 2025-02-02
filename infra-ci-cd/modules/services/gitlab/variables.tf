@@ -9,3 +9,7 @@ variable "private_subnet_id" {
 variable "gitlab_sg_id" {
   description = "The ID of the GitLab security group"
 }
+
+variable "ssh_key" {
+  description = "The name of the SSH key pair"
+}

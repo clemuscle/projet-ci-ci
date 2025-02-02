@@ -4,10 +4,12 @@ resource "aws_instance" "wireguard" {
   vpc_security_group_ids = [var.wireguard_sg_id]
   subnet_id     = var.public_subnet_id
 
+  key_name = var.ssh_key
+
   user_data = file("${path.module}/cloud-init.yaml")
 
   tags = {
-    Name = "wireguard-server"
+    Name = "wireguard-instance"
   }
 }
 

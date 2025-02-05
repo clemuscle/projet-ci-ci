@@ -6,6 +6,8 @@ resource "aws_instance" "wireguard" {
 
   key_name = var.ssh_key
 
+  source_dest_check = false
+
   user_data = file("${path.module}/cloud-init.yaml")
 
   tags = {

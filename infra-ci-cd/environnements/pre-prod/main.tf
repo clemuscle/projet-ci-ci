@@ -1,3 +1,16 @@
+data "terraform_remote_state" "infra" {
+  backend = "s3"
+  config = {
+    bucket         = "infra-ci-cd-terraform-states"
+    key            = "environments/pre-prod/terraform.tfstate"
+    region         = var.region
+    dynamodb_table = "terraform-lock"
+    encrypt        = true
+    access_key = var.aws_access_key
+    secret_key = var.aws_secret_key
+  }
+}
+
 module "vpc" {
   source = "../../modules/vpc"
 }
@@ -35,7 +48,21 @@ module "wireguard" {
   ssh_key = module.ssh.ssh_key
 }
 
-output "vpn_public_ip" {
-  value = module.wireguard.vpn_public_ip
+
+output "wireguard_public_ip" {
+  value = module.wireguard.wireguard_public_ip
   description = "Adresse IP publique du serveur VPN"
+}
+
+module "coredns" {
+  source = "../../modules/services/coredns"
+  vpc_id = module.vpc.vpc_id
+  private_subnet_id = module.vpc.private_subnet_id
+  coredns_sg_id = module.security_group.coredns_sg_id
+  ssh_key = module.ssh.ssh_key
+  services = {
+    "gitlab" = module.gitlab.gitlab_private_ip
+    "nexus" = module.nexus.nexus_private_ip
+    "wireguard" = module.wireguard.wireguard_private_ip
+  }
 }

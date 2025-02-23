@@ -1,0 +1,27 @@
+#cloud-config
+package_update: true
+packages:
+  - curl
+  - unzip
+  - etcd
+
+#cloud-config
+write_files:
+  - path: /etc/coredns/Corefile
+    content: |
+      . {
+        log
+        errors
+        health
+        ready
+        hosts {
+        %{ for name, ip in services ~}
+          ${ip} ${name}.local
+        %{ endfor ~}
+          fallthrough
+        }
+        forward . 8.8.8.8
+      }
+
+runcmd:
+  - systemctl restart coredns

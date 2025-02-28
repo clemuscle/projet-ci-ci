@@ -4,10 +4,11 @@ packages:
   - curl
   - unzip
   - etcd
+  - coredns
 
 #cloud-config
 write_files:
-  - path: /etc/coredns/Corefile
+  - path:  
     content: |
       . {
         log

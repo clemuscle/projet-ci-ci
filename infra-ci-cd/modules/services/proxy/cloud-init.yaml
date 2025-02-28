@@ -1,0 +1,19 @@
+#cloud-config
+package_update: true
+packages:
+  - squid
+
+write_files:
+  - path: /etc/squid/squid.conf
+    content: |
+      acl localnet src 10.0.2.0/24  # Sous-réseau privé autorisé
+      http_access allow localnet
+      http_access deny all
+      http_port 3128
+
+      access_log stdio:/var/log/squid/access.log
+      cache_log /var/log/squid/cache.log
+
+runcmd:
+  - systemctl restart squid
+  - systemctl enable squid

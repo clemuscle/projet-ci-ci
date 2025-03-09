@@ -16,8 +16,8 @@ resource "aws_security_group" "proxy_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
 
-  tags = {
-    Name = "proxy-sg"
-  }
+output "proxy_sg_id" {
+  value = aws_security_group.proxy_sg.id
 }

@@ -1,4 +1,14 @@
 #cloud-config
+#cloud-config
+write_files:
+  - path: /etc/environment
+    content: |
+      http_proxy="http://10.0.1.10:3128"
+      https_proxy="http://10.0.1.10:3128"
+      no_proxy="127.0.0.1,localhost"
+
+runcmd:
+  - source /etc/environment
 
 packages:
   - curl

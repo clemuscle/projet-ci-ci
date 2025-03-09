@@ -66,3 +66,16 @@ module "coredns" {
     "wireguard" = module.wireguard.wireguard_private_ip
   }
 }
+
+module "proxy" {
+  source = "../../modules/services/proxy"
+  vpc_id = module.vpc.vpc_id
+  public_subnet_id = module.vpc.public_subnet_id
+  proxy_sg_id = module.security_group.proxy_sg_id
+  ssh_key = module.ssh.ssh_key
+}
+
+output "proxy_public_ip" {
+  value = module.proxy.proxy_public_ip
+  description = "Adresse IP publique du serveur proxy"
+}
